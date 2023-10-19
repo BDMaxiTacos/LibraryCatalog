@@ -1,0 +1,14 @@
+@media (min-width: 992px){
+    nav .nav-link:focus {
+        border-bottom: 1px black solid;
+    }
+    
+    nav .nav-link:hover {
+        background-color: #0000004f;
+        color: #ffffff;
+    }
+
+    nav .navbar-collapse {
+        flex-grow: unset;
+    }
+}
