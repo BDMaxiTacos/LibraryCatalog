@@ -26,11 +26,11 @@ h5 {
     font-size: 1.8rem;
 }
 
-h6 {
+h6, th {
     font-size: 1.6rem;
 }
 
-p, label, .form-control, .btn{
+p, label, td, .form-control, .btn{
     font-size: 1.4rem;
 }
 
@@ -126,6 +126,23 @@ footer section {
     box-shadow: 0.5rem 0.5rem 1.5rem 0.5rem grey;
     max-width: 400px;
     padding: 2% 5%;
+}
+
+#admin-books table{
+    margin-top: 20px;
+}
+
+#admin-books > .row{
+    margin: 20px 0;
+}
+
+div.add-button {
+    display: flex;
+    justify-content: end;
+}
+
+#book-form .form-group{
+    margin: 15px 0;
 }
 
 @media (min-width: 992px){
