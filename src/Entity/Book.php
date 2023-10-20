@@ -23,11 +23,17 @@ class Book
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $publicationDate = null;
+    private ?\DateTimeInterface $publication_date = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $catchphrase = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $summary = null;
 
     public function __construct()
     {
@@ -80,12 +86,12 @@ class Book
 
     public function getPublicationDate(): ?\DateTimeInterface
     {
-        return $this->publicationDate;
+        return $this->publication_date;
     }
 
-    public function setPublicationDate(\DateTimeInterface $publicationDate): static
+    public function setPublicationDate(\DateTimeInterface $publication_date): static
     {
-        $this->publicationDate = $publicationDate;
+        $this->publication_date = $publication_date;
 
         return $this;
     }
@@ -98,6 +104,30 @@ class Book
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCatchphrase(): ?string
+    {
+        return $this->catchphrase;
+    }
+
+    public function setCatchphrase(string $catchphrase): static
+    {
+        $this->catchphrase = $catchphrase;
+
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    public function setSummary(string $summary): static
+    {
+        $this->summary = $summary;
 
         return $this;
     }
