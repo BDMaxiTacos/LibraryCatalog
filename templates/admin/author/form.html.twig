@@ -3,11 +3,11 @@
 {% block body %}
     <section id="author-form" class="container pad-v">
         <h1>{{ title }}</h1>
-        <div class="add-button">
+        <div class="top-actions">
             <a type="button" href="{{ path('admin_authors') }}" class="btn btn-secondary"><i class="bi bi-chevron-left"></i> Retour à la liste</a>
         </div>
         <div>
-            {{ form_start(form, { attr: { class: 'row' } }) }}
+            {{ form_start(form, { attr: { class: 'row entity-form' } }) }}
                 <div class="form-group col-12">
                     {{ form_label(form.name, 'Nom', { attr: { 'class': 'form-label' } }) }}
                     {{ form_widget(form.name, { attr: { 'class': 'form-control' } }) }}

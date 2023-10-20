@@ -3,14 +3,27 @@
 {% block body %}
     <section id="book-form" class="container pad-v">
         <h1>{{ title }}</h1>
-        <div class="add-button">
+        <div class="top-actions">
             <a type="button" href="{{ path('admin_books') }}" class="btn btn-secondary"><i class="bi bi-chevron-left"></i> Retour à la liste</a>
+            {% if 'book_edit' in app.request.get('_route') %}
+                <form method="POST" class="del-form" action="{{ path('admin_book_img_delete', {id: book.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer l\'image du livre?')">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+                    <button class="btn btn-secondary">
+                        <i class="bi bi-close"></i> Supprimer l'image
+                    </button>
+                </form>
+            {% endif %}
         </div>
         <div>
-            {{ form_start(form, { attr: { class: 'row' } }) }}
-                <div class="form-group col-12">
+            {{ form_start(form, { attr: { class: 'row entity-form' } }) }}
+                <div class="form-group col-12 col-xl-6">
                     {{ form_label(form.title, 'Titre', { attr: { 'class': 'form-label' } }) }}
                     {{ form_widget(form.title, { attr: { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group col-12 col-xl-6">
+                    {{ form_label(form.image, 'Image', { attr: { 'class': 'form-label' } }) }}
+                    {{ form_widget(form.image, { attr: { 'class': 'form-control' } }) }}
                 </div>
                 <div class="form-group col-12">
                     {{ form_label(form.catchphrase, 'Phrase d\'accroche', { attr: { 'class': 'form-label' } }) }}

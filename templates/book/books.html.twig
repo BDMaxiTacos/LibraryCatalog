@@ -10,7 +10,7 @@
             <div class="row">
                 {% for book in books %}
                     <div class="card col-xl-3">
-                        <img src="" class="card-img-top" alt="{{ book.title }}">
+                        <img src="{{ book.imageUrl }}" class="card-img-top" alt="{{ book.title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ book.title }}</h5>
                             <p class="card-text">{{ book.catchphrase }}</p>

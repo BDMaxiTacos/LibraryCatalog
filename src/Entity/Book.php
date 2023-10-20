@@ -35,6 +35,9 @@ class Book
     #[ORM\Column(type: Types::TEXT)]
     private ?string $summary = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image_url = null;
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();
@@ -128,6 +131,18 @@ class Book
     public function setSummary(string $summary): static
     {
         $this->summary = $summary;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->image_url;
+    }
+
+    public function setImageUrl(?string $image_url): static
+    {
+        $this->image_url = $image_url;
 
         return $this;
     }
