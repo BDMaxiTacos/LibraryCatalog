@@ -126,13 +126,13 @@ footer section {
     height: max-content;
 }
 
-#login-form, section[id$="-form"] form {
+#login-form, section[id$="-form"] form:not(.del-form) {
     box-shadow: 0.5rem 0.5rem 1.5rem 0.5rem grey;
     max-width: 75%;
     padding: 2% 5%;
 }
 
-section[id$="-form"] div:has(form) {
+section[id$="-form"] div:has(form.entity-form) {
     display: flex;
     justify-content: center;
     align-items: center;

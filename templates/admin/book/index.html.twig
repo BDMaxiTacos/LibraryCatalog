@@ -10,12 +10,12 @@
         <div class="row">
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success">
-                    {{ message }}
+                    <p>{{ message }}</p>
                 </div>
             {% endfor %}
             {% for message in app.flashes('error') %}
                 <div class="alert alert-danger">
-                    {{ message }}
+                    <p>{{ message }}</p>
                 </div>
             {% endfor %}
             <table class="table table-striped">
