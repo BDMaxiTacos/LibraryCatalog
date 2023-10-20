@@ -133,11 +133,11 @@ footer section {
         flex-grow: unset;
     }
 
-    nav .nav-link:focus {
+    nav .nav-link.active {
         border-bottom: 1px black solid;
     }
     
-    nav .nav-link:hover {
+    nav .nav-link:focus, nav .nav-link:hover {
         background-color: #0000004f;
         color: #ffffff;
     }

@@ -8,16 +8,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('books_home') }}">Livres</a>
+                        <a class="nav-link {% if app.request.get('_route') == 'books_home' or app.request.get('_route') == 'book_details' %}active{% endif %}" href="{{ path('books_home') }}">Livres</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Auteurs</a>
+                        <a class="nav-link {% if app.request.get('_route') == 'authors_home' or app.request.get('_route') == 'author_details' %}active{% endif %}" href="#">Auteurs</a>
                     </li>
                     
 
                     {% if is_granted("ROLE_LIBRARIAN") %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('admin_home') }}">Admin</a>
+                            <a class="nav-link {% if 'admin_' in app.request.attributes.get('_route') %}active{% endif %}" href="{{ path('admin_home') }}">Admin</a>
                         </li>
                     {% endif %}
                     {% if not app.user %}
