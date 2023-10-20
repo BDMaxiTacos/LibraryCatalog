@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,15 @@ class BookController extends AbstractController
         
         return $this->render('book/books.html.twig', [
             'books' => $books
+        ]);
+    }
+
+    public function one($id, BookRepository $bookRepository): Response
+    {
+        $book = $bookRepository->findOneBy(['id' => $id]);
+
+        return $this->render('book/one.html.twig', [
+            'book' => $book
         ]);
     }
 }
