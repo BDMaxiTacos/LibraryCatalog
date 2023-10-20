@@ -24,7 +24,7 @@ class Author
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $handle = null;
 
-    #[ORM\ManyToMany(targetEntity: Book::class, inversedBy: 'authors')]
+    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'authors')]
     private Collection $books;
 
     public function __construct()
