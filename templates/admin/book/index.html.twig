@@ -2,8 +2,65 @@
 
 {% block body %}
     <section id="admin-books" class="container pad-v">
+        <h1>Gestion des livres</h1>
+        <div class="add-button">
+            <a type="button" href="{{ path('admin_book_add') }}" class="btn btn-secondary"><i class="bi bi-plus"></i> Ajouter</a>
+        </div>
         <div class="row">
-            <h1>Gestion des livres</h1>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <table class="table table-striped">
+                <tr>
+                    <th>Date de publication</th>
+                    <th>Titre</th>
+                    <th>Catégorie</th>
+                    <th>Auteurs</th>
+                    <th>Actions</th>
+                </tr>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.publicationDate|date("d-m-Y") }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.category.name }}</td>
+                        <td>
+                            {% set authors = '' %}
+                            {% for author in book.authors %}
+                                {% set authors = authors ~ author.name ~ ' ' ~ author.firstname %}
+                                {% if not (author == book.authors|last) %}
+                                    {% set authors = authors ~ ', ' %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ authors }}
+                        </td>
+                        <td class="row">
+                            <a class="col-6" href="{{ path('admin_book_edit', {id: book.id}) }}">
+                                <button class="btn btn-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="margin-bottom: 5px"
+                                            class="d-none d-lg-inline-flex bi bi-pen" viewBox="0 0 16 16">
+                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                    </svg>
+                                </button>
+                            </a>
+                            <form class="col-6" method="POST" action="{{ path('admin_book_delete', {id: book.id}) }}"
+                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre?')">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+                                <button class="btn btn-danger">
+                                    <svg xmlns="http://www.w3.org/2000/svg"width="16" height="16" fill="currentColor" style="margin-bottom: 5px"
+                                            class="d-none d-lg-inline-flex bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+                
+            </div>
         </div>
     </section>
 {% endblock %}
