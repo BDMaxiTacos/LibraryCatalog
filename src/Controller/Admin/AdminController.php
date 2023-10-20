@@ -33,7 +33,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/authors', name: 'admin_athors')]
+    #[Route('/admin/authors', name: 'admin_authors')]
     public function authors(AuthorRepository $authorRepository): Response
     {
         $user = $this->getuser();
