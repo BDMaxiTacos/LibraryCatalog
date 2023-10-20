@@ -4,7 +4,7 @@
     <section id="book-form" class="container pad-v">
         <h1>{{ title }}</h1>
         <div class="add-button">
-            <a type="button" href="{{ path('admin_books') }}" class="btn btn-secondary">Retour à la liste</a>
+            <a type="button" href="{{ path('admin_books') }}" class="btn btn-secondary"><i class="bi bi-chevron-left"></i> Retour à la liste</a>
         </div>
         <div>
             {{ form_start(form, { attr: { class: 'row' } }) }}
@@ -16,11 +16,11 @@
                     {{ form_label(form.catchphrase, 'Phrase d\'accroche', { attr: { 'class': 'form-label' } }) }}
                     {{ form_widget(form.catchphrase, { attr: { 'class': 'form-control', 'maxlength': '150' } }) }}
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-12 col-xl-6">
                     {{ form_label(form.category, 'Catégorie', { attr: { 'class': 'form-label' } }) }}
                     {{ form_widget(form.category, { attr: { 'class': 'select2-multiple form-control' } }) }}
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-12 col-xl-6">
                     {{ form_label(form.authors, 'Auteurs', { attr: { 'class': 'form-label' } }) }}
                     {{ form_widget(form.authors, { attr: { 'class': 'select2-multiple form-control' } }) }}
                 </div>

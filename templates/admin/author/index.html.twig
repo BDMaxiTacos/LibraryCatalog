@@ -2,8 +2,58 @@
 
 {% block body %}
     <section id="admin-books" class="container pad-v">
+        <h1>Gestion des auteurs</h1>
+        <div class="top-actions">
+            <a type="button" href="{{ path('admin_home') }}" class="btn btn-secondary"><i class="bi bi-chevron-left"></i> Retour à l'accueil</a>
+            <a type="button" href="{{ path('admin_author_add') }}" class="btn btn-secondary"><i class="bi bi-plus"></i> Ajouter</a>
+        </div>
         <div class="row">
-            <h1>Gestion des auteurs</h1>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Nom de plume</th>
+                        <th>Nombre de livres</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for author in authors %}
+                    <tr>
+                        <td>{{ author.name }}</td>
+                        <td>{{ author.firstname }}</td>
+                        <td>{{ author.handle }}</td>
+                        <td>{{ author.books|length }}</td>
+                        <td class="row">
+                            <a class="col-6" href="{{ path('admin_author_edit', {id: author.id}) }}">
+                                <button class="btn btn-secondary">
+                                    <i class="bi bi-pen"></i>
+                                </button>
+                            </a>
+                            <form class="col-6" method="POST" action="{{ path('admin_author_delete', {id: author.id}) }}"
+                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet auteur?')">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ author.id) }}">
+                                <button class="btn btn-danger">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </section>
 {% endblock %}

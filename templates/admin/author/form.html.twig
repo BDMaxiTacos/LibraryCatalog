@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="author-form" class="container pad-v">
+        <h1>{{ title }}</h1>
+        <div class="add-button">
+            <a type="button" href="{{ path('admin_authors') }}" class="btn btn-secondary"><i class="bi bi-chevron-left"></i> Retour à la liste</a>
+        </div>
+        <div>
+            {{ form_start(form, { attr: { class: 'row' } }) }}
+                <div class="form-group col-12">
+                    {{ form_label(form.name, 'Nom', { attr: { 'class': 'form-label' } }) }}
+                    {{ form_widget(form.name, { attr: { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group col-12">
+                    {{ form_label(form.firstname, 'Prénom', { attr: { 'class': 'form-label' } }) }}
+                    {{ form_widget(form.firstname, { attr: { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group col-12">
+                    {{ form_label(form.handle, 'Pseudo', { attr: { 'class': 'form-label' } }) }}
+                    {{ form_widget(form.handle, { attr: { 'class': 'form-control' } }) }}
+                </div>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

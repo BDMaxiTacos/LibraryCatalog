@@ -38,6 +38,10 @@ a {
     color: #3b3b3b;
 }
 
+tr {
+    vertical-align: middle;
+}
+
 nav {
     box-shadow: 0 0 1rem 0 grey;
 }
@@ -92,7 +96,7 @@ footer section {
     padding-bottom: 3px;
 }
 
-.card-body:has(.card-link):hover a {
+.card-body:has(.card-link) a:hover {
     border-bottom: 1px solid #0000007c;
 }
 
@@ -122,10 +126,34 @@ footer section {
     height: max-content;
 }
 
-#login-form {
+#login-form, section[id$="-form"] form {
     box-shadow: 0.5rem 0.5rem 1.5rem 0.5rem grey;
-    max-width: 400px;
+    max-width: 75%;
     padding: 2% 5%;
+}
+
+section[id$="-form"] div:has(form) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+section[id$="-form"] button[type="submit"] {
+    width: 50%;
+}
+
+.select2-container{
+    width: 100%!important;
+}
+
+section[id$="-form"] .form-group{
+    margin: 15px 0;
+}
+
+section[id$="-form"] .form-group:has(.select2-container){
+    display: flex;
+    flex-direction: column;
 }
 
 #admin-books table{
@@ -136,14 +164,12 @@ footer section {
     margin: 20px 0;
 }
 
-div.add-button {
+div.top-actions {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
 }
 
-#book-form .form-group{
-    margin: 15px 0;
-}
+
 
 @media (min-width: 992px){
     nav .navbar-collapse {
