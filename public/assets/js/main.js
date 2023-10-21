@@ -3,6 +3,9 @@ $('.select2-multiple').select2({
     allowClear: true
 });
 
+const toastElList = document.querySelectorAll('.toast')
+const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl))
+
 let bookNav = document.querySelector('.nav-tabs.book-tabs');
 if(bookNav){
     let tabs = bookNav.querySelectorAll('.nav-link');

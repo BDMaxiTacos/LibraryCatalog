@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="author-details" class="container pad-v">
+        <h1 class="page-title">{{ author.name }} {{ author.firstname }} <em>aka {{ author.handle }}</em></h1>
+        <h2>Livres associés</h2>
+        <div id="author-books" class="row">
+            {% for book in author.books %}
+                {% include 'includes/singlebook.html.twig' with {book: book} %}
+            {% endfor %}
+                
+            {% if author.books|length % 3 >= 1 %}
+                {% for i in 0..(author.books|length % 3) %}
+                    <div class="col-xl-3 d-none d-xl-flex"></div>
+                {% endfor %}
+            {% endif %}
+
+            {% if author.books|length % 2 == 1 %}
+                <div class="col-5 d-flex d-xl-none"></div>
+            {% endif %}
+
+            {% if author.books|length < 1 %}
+                <p class="col-xl-3">Aucun livre associé</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

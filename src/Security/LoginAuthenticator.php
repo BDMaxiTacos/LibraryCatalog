@@ -47,8 +47,14 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+
+        if(in_array('ROLE_LIBRARIAN', $token->getUser()->getRoles())){
+            $path = 'admin_home';
+        }else{
+            $path = 'home';
+        }
         
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        return new RedirectResponse($this->urlGenerator->generate($path));
     }
 
     protected function getLoginUrl(Request $request): string

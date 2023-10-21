@@ -30,8 +30,20 @@ h6, th {
     font-size: 1.6rem;
 }
 
-p, label, td, .form-control, .btn, .nav-tabs .nav-link{
+em{
+    font-size: 0.75em;
+}
+
+p, strong, 
+label, span, div, 
+td, 
+a, button, 
+.form-control, .btn {
     font-size: 1.4rem;
+}
+
+small {
+    font-size: 1rem;
 }
 
 a {
@@ -86,7 +98,8 @@ footer section {
     margin-top: -250px;
 }
 
-#books .card {
+#books div[class*="col-"],
+#author-books div[class*="col-"] {
     margin-bottom: 20px;
 }
 
@@ -117,21 +130,29 @@ footer section {
     background-position: bottom;
 }
 
-#banner.books-banner .page-title {
+#banner.authors-banner {
+    background-image: linear-gradient(#0000007c, #0000007c), url('/assets/img/authors.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+#banner.books-banner .page-title,
+#banner.authors-banner .page-title {
     color: white;
 }
 
-.row:has(#login-form) {
+#login-form .row:has(form) {
     height: max-content;
 }
 
-#login-form, section[id$="-form"] form:not(.del-form) {
+section[id$="-form"] form:not(.del-form) {
     box-shadow: 0.5rem 0.5rem 1.5rem 0.5rem grey;
     max-width: 75%;
     padding: 2% 5%;
 }
 
-section[id$="-form"] div:has(form.entity-form) {
+section[id$="-form"] div:has(form) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -184,8 +205,20 @@ div.top-actions {
     margin: 20px 0;
 }
 
+.toast {
+    position: absolute;
+    z-index: 99999;
+    bottom: 5%;
+    right: 1%;
+}
+
+.toast img {
+    width: 10%;
+}
+
 @media (min-width: 1200px){
-    #books .card {
+    #books div[class*="col-"], 
+    #author-books div[class*="col-"] {
         margin-right: 20px;
     }
 }
@@ -214,7 +247,8 @@ div.top-actions {
 
 @media (max-width: 1199px) {
 
-    #books div[class^="col-"]:has(> img) {
+    #books div[class^="col-"]:has(> img),
+    #author-books div[class^="col-"]:has(> img) {
         margin: auto;
     }
 }

@@ -15,7 +15,7 @@ class BookController extends AbstractController
     {
         $books = $bookRepository->findAll();
         
-        return $this->render('book/books.html.twig', [
+        return $this->render('front/book/books.html.twig', [
             'books' => $books
         ]);
     }
@@ -25,7 +25,7 @@ class BookController extends AbstractController
         Book $book
     ): Response
     {
-        return $this->render('book/book.html.twig', [
+        return $this->render('front/book/book.html.twig', [
             'book' => $book
         ]);
     }

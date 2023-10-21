@@ -1,6 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for message in app.flashes('success') %}
+        {% include 'includes/toast.html.twig' with {image: asset('/assets/img/checkmark.webp'), message: message, title: 'Action effectuée'} %}
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        {% include 'includes/toast.html.twig' with {image: asset('/assets/img/invalid.webp'), message: message, title: 'Impossible d\'effectuer l\'action'} %}
+    {% endfor %}
+    
+
     <section id="presentation" class="no-pad">
         <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true" data-bs-touch="false">
             <div class="carousel-indicators">

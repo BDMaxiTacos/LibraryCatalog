@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="banner" class="books-banner">
+        <h1 class="page-title">Liste des livres</h1>
+    </section>
+
+    <section id="books" class="container pad-v">
+        <div>
+            <div class="row">
+                {% for book in books %}
+                    {% include 'includes/singlebook.html.twig' with {book: book} %}
+                {% endfor %}
+                
+                {% if books|length % 3 >= 1 %}
+                    {% for i in 0..(books|length % 3) %}
+                        <div class="col-xl-3 d-none d-xl-flex"></div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if books|length % 2 == 1 %}
+                    <div class="col-5 d-flex d-xl-none"></div>
+                {% endif %}
+
+                {% if books|length < 1 %}
+                    <p class="col-xl-3">Aucun livre trouvé</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
