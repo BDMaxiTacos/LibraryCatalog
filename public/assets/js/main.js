@@ -55,8 +55,9 @@ function setRating(e, stars){
                 targetDone = true;
             }
         }else{
-            star.classList.remove('bi-star-fill');
             star.classList.add('bi-star');
+            star.classList.remove('bi-star-fill');
+            star.classList.remove('locked');
         }
     });
     document.getElementById('comment_rating').value = e.target.dataset.value;
@@ -66,7 +67,7 @@ function setFill(e, stars){
     let targetDone = false;
     if(!e.target.classList.contains('locked')){
         stars.forEach((star) => {
-            if(!targetDone){
+            if(!targetDone && !star.classList.contains('locked')){
                 star.classList.add('bi-star-fill');
                 star.classList.remove('bi-star');
                 if(star == e.target){
@@ -81,7 +82,7 @@ function removeFill(e, stars){
     let targetDone = false;
     if(!e.target.classList.contains('locked')){
         stars.forEach((star) => {
-            if(!targetDone){
+            if(!targetDone && !star.classList.contains('locked')){
                 star.classList.add('bi-star');
                 star.classList.remove('bi-star-fill');
                 if(star == e.target){
