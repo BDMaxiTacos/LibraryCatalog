@@ -5,7 +5,49 @@
 {% block body %}
     <section id="author-details" class="container pad-v">
         <h1 class="page-title">{{ author.name }} {{ author.firstname }} <em>aka {{ author.handle }}</em></h1>
-        <h2>Livres associés</h2>
+        <h2>Genres</h2>
+        <div id="author-categories" class="row">
+            {% set categories = '' %}
+            {% for category in associatedCategories %}
+                {% set categories = categories ~ category.name %}
+                {% if category != associatedCategories|last %}
+                    {% set categories = categories ~ ', ' %}
+                {% endif %}
+            {% endfor %}
+            
+            {% if categories|length < 1 %}
+                <p class="col-xl-3">Aucune catégorie associée</p>
+            {% else %}
+                <p>{{ categories }}</p>
+            {% endif %}
+            
+        </div>
+        <h2>Auteurs associés</h2>
+        <div id="author-associated" class="row">
+            {% set authors = 0 %}
+            {% for author in associatedAuthor %}
+                <div class="card col-5 col-xl-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ author.name }} {{ author.firstname }}</h5>
+                        <p class="card-text">Nombre de livres: {{ author.books|length }}</p>
+                        <a href="{{ path('authors_one', { id: author.id }) }}" class="btn btn-primary">En savoir plus</a>
+                    </div>
+                </div>
+                {% set authors = authors + 1 %}
+            {% endfor %}
+
+            {% set toDisplay = 3 - authors|length % 3 %}
+            {% if toDisplay >= 1 %}
+                {% for i in 1..toDisplay %}
+                    <div class="col-xl-3 d-none d-xl-flex"></div>
+                {% endfor %}
+            {% endif %}
+
+            {% if authors < 1 %}
+                <p class="col-xl-3">Aucun auteur associé</p>
+            {% endif %}
+        </div>
+        <h2>Livres</h2>
         <div id="author-books" class="row">
             {% for book in author.books %}
                 {% include 'includes/singlebook.html.twig' with {book: book} %}

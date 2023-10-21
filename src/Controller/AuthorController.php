@@ -25,8 +25,26 @@ class AuthorController extends AbstractController
         Author $author
     ): Response
     {
+        $associatedAuthors = array();
+        foreach ($author->getBooks() as $book) {
+            foreach ($book->getAuthors() as $authorToAdd) {
+                if(!in_array($authorToAdd, $associatedAuthors) && $authorToAdd != $author){
+                    $associatedAuthors[] = $authorToAdd;
+                }
+            }
+        }
+
+        $associatedCategories = array();
+        foreach ($author->getBooks() as $book) {
+            if(!in_array($book->getCategory(), $associatedCategories)){
+                $associatedCategories[] = $book->getCategory();
+            }
+        }
+
         return $this->render('front/author/author.html.twig', [
-            'author' => $author
+            'author' => $author,
+            'associatedAuthor' => $associatedAuthors,
+            'associatedCategories' => $associatedCategories
         ]);
     }
 }

@@ -61,7 +61,7 @@
                         <p class="card-text">{{ book.catchphrase }}</p>
                     </div>
                     <div class="card-body">
-                        <a href="#" class="card-link">En savoir plus</a>
+                        <a href="{{ path('books_one', { id: book.id }) }}" class="card-link">En savoir plus</a>
                     </div>
                 </div>
             {% endfor %}

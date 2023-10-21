@@ -99,7 +99,8 @@ footer section {
 }
 
 #books div[class*="col-"],
-#author-books div[class*="col-"] {
+#author-books div[class*="col-"],
+#author-associated div[class*="col-"] {
     margin-bottom: 20px;
 }
 
@@ -216,9 +217,14 @@ div.top-actions {
     width: 10%;
 }
 
+#author-details h2 {
+    margin-top: 30px;
+}
+
 @media (min-width: 1200px){
     #books div[class*="col-"], 
-    #author-books div[class*="col-"] {
+    #author-books div[class*="col-"],
+    #author-associated div[class*="col-"] {
         margin-right: 20px;
     }
 }
