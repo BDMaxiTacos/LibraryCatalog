@@ -30,7 +30,7 @@ h6, th {
     font-size: 1.6rem;
 }
 
-p, label, td, .form-control, .btn{
+p, label, td, .form-control, .btn, .nav-tabs .nav-link{
     font-size: 1.4rem;
 }
 
@@ -87,7 +87,6 @@ footer section {
 }
 
 #books .card {
-    margin-right: 20px;
     margin-bottom: 20px;
 }
 
@@ -169,8 +168,27 @@ div.top-actions {
     justify-content: space-between;
 }
 
+.nav-tabs .nav-link:not(.active) {
+    color: grey;
+}
 
+.nav-tabs .nav-link:hover {
+    color: #505050;
+}
 
+.book-tab-content {
+    padding: 1% 2%;
+}
+
+#book-details > div {
+    margin: 20px 0;
+}
+
+@media (min-width: 1200px){
+    #books .card {
+        margin-right: 20px;
+    }
+}
 @media (min-width: 992px){
     nav .navbar-collapse {
         flex-grow: unset;
@@ -195,6 +213,13 @@ div.top-actions {
 }
 
 @media (max-width: 1199px) {
+
+    #books div[class^="col-"]:has(> img) {
+        margin: auto;
+    }
+}
+
+@media (max-width: 768px) {
 
     #newest-additions .row div:not(:last-child), 
     #books .row div:not(:last-child) {

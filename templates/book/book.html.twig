@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% if book.imageUrl|length > 0 %}
+    {% set image = book.imageUrl %}
+{% else %}
+    {% set image = asset('/assets/img/image_placeholder.webp') %}
+{% endif %}
+
+{% block body %}
+    <section id="book-details" class="container pad-v">
+        <div class="row">
+            <div class="col-xl-6">
+                <img src="{{ image }}" width="100%" alt="{{ book.title }}">
+            </div>
+            <div class="col-xl-6">
+                <h1 class="page-title">{{ book.title }}</h1>
+                <p>{{ book.catchphrase }}</p>
+                {# book rating #}
+            </div>
+        </div>
+        <div class="book-infos">
+            <ul class="nav nav-tabs book-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-target="summary">Résumé</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-target="comments">Commentaires</a>
+                </li>
+            </ul>
+            <div class="book-tab-content">
+                <div id="summary">
+                    <p>
+                        {% if book.summary|length > 0 %}
+                            {{ book.summary }}
+                        {% else %}
+                            Aucun résumé à afficher
+                        {% endif %}
+                    </p>
+                </div>
+                <div id="comments" style="display: none;">
+                    {# for build: title -> rating -> date -> comment #}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

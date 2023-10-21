@@ -20,11 +20,12 @@ class BookController extends AbstractController
         ]);
     }
 
-    public function one($id, BookRepository $bookRepository): Response
+    #[Route('/books/{id}', name: 'books_one')]
+    public function one(
+        Book $book
+    ): Response
     {
-        $book = $bookRepository->findOneBy(['id' => $id]);
-
-        return $this->render('book/one.html.twig', [
+        return $this->render('book/book.html.twig', [
             'book' => $book
         ]);
     }
