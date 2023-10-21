@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,10 +16,10 @@ class CommentType extends AbstractType
         $builder
             ->add('comment', TextareaType::class, [
                 'required' => true,
+                'attr' => ['rows' => 7]
             ])
-            ->add('rating', ChoiceType::class, [
-                'required' => true,
-                'expanded' => true
+            ->add('rating', IntegerType::class, [
+                'required' => true
             ])
         ;
     }

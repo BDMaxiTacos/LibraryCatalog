@@ -29,8 +29,9 @@ class BookType extends AbstractType
                 'required' => true,
             ])
             ->add('summary', TextareaType::class, [
+                'attr' => ['rows' => 7],
                 'required' => true
-                ])
+            ])
             ->add('authors', EntityType::class, [
                 'class' => Author::class,
                 'query_builder' => function(AuthorRepository $authorRepository){

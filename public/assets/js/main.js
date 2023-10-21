@@ -26,3 +26,68 @@ function changeTab(e, tabs){
         }
     });
 }
+
+let ratingStars = document.querySelector('#add-comment');
+if(ratingStars){
+    let stars = ratingStars.querySelectorAll('.bi-star');
+
+    stars.forEach((star) => {
+        star.addEventListener('click', (e) => setRating(e, stars));
+    });
+
+    stars.forEach((star) => {
+        star.addEventListener('mouseover', (e) => setFill(e, stars));
+    });
+
+    stars.forEach((star) => {
+        star.addEventListener('mouseleave', (e) => removeFill(e, stars));
+    });
+}
+
+function setRating(e, stars){
+    let targetDone = false;
+    stars.forEach((star) => {
+        if(!targetDone){
+            star.classList.add('bi-star-fill');
+            star.classList.add('locked');
+            star.classList.remove('bi-star');
+            if(star == e.target){
+                targetDone = true;
+            }
+        }else{
+            star.classList.remove('bi-star-fill');
+            star.classList.add('bi-star');
+        }
+    });
+    document.getElementById('comment_rating').value = e.target.dataset.value;
+}
+
+function setFill(e, stars){
+    let targetDone = false;
+    if(!e.target.classList.contains('locked')){
+        stars.forEach((star) => {
+            if(!targetDone){
+                star.classList.add('bi-star-fill');
+                star.classList.remove('bi-star');
+                if(star == e.target){
+                    targetDone = true;
+                }
+            }
+        });
+    }
+}
+
+function removeFill(e, stars){
+    let targetDone = false;
+    if(!e.target.classList.contains('locked')){
+        stars.forEach((star) => {
+            if(!targetDone){
+                star.classList.add('bi-star');
+                star.classList.remove('bi-star-fill');
+                if(star == e.target){
+                    targetDone = true;
+                }
+            }
+        });
+    }
+}

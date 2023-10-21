@@ -17,7 +17,20 @@
             <div class="col-xl-6">
                 <h1 class="page-title">{{ book.title }}</h1>
                 <p>{{ book.catchphrase }}</p>
-                {# book rating #}
+                {% if book.comments|length > 0 %}
+                    <span class="book-rating">
+                        {% set rating = 0 %}
+                        {% for comment in book.comments %}
+                            {% set rating = rating + comment.rating %}
+                        {% endfor %}
+                        {% set averageRating = rating / (book.comments|length) %}
+                        <i class="bi bi-star-fill">
+                            <em>
+                                {{ averageRating }}
+                            </em>
+                        </i>
+                    </span>
+                {% endif %}
             </div>
         </div>
         <div class="book-infos">
@@ -27,6 +40,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-target="comments">Commentaires</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-target="add-comment">Ajouter un commentaire</a>
                 </li>
             </ul>
             <div class="book-tab-content">
@@ -40,7 +56,44 @@
                     </p>
                 </div>
                 <div id="comments" style="display: none;">
-                    {# for build: title -> rating -> date -> comment #}
+                    <h2>Commentaires</h2>
+                    {% for comment in book.comments %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>{{ comment.user.username }}</h3>
+                                <i class="bi bi-star-fill"><em>{{ comment.rating }}</em></i>
+                            </div>
+                            <div class="card-body">
+                                <span class="card-title">Publié le {{ comment.publicationDate|date('d-m-Y') }}</span>
+                                <p class="card-text">{{ comment.comment }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% if book.comments|length < 1 %}
+                        <p class="col-xl-3">Aucun commentaire trouvé</p>
+                    {% endif %}
+                </div>
+                <div id="add-comment" style="display:none">
+                    <h2>Ajouter un commentaire</h2>
+                    {{ form_start(form, { attr: { class: 'row' } }) }}
+                        <div class="form-group col-12">
+                            {{ form_label(form.rating, 'Note', { attr: { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.rating, { attr: { 'class': 'form-control visually-hidden' } }) }}
+                            <div id="star-rating">
+                                <i class="bi bi-star" data-value="1"></i>
+                                <i class="bi bi-star" data-value="2"></i>
+                                <i class="bi bi-star" data-value="3"></i>
+                                <i class="bi bi-star" data-value="4"></i>
+                                <i class="bi bi-star" data-value="5"></i>
+                            </div>
+                        </div>
+                        <div class="form-group col-12">
+                            {{ form_label(form.comment, 'Commentaire', { attr: { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.comment, { attr: { 'class': 'form-control' } }) }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter le commentaire</button>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>

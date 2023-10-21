@@ -7,6 +7,8 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\BookRepository;
 use App\Form\SearchBookType;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,7 +78,8 @@ class BookController extends AbstractController
     #[Route('/books/{id}', name: 'books_one')]
     public function one(
         Book $book,
-        Request $request
+        Request $request,
+        EntityManagerInterface $em
     ): Response
     {
         $comment = new Comment();
@@ -84,10 +87,16 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $formData = $form->getData();
+            $comment = $form->getData();
 
-            // dd($formData);
+            $comment->setUser($this->getUser());
+            $comment->setBook($book);
+            $comment->setPublicationDate(new DateTime());
 
+            // dd($comment);
+
+            $em->persist($comment);
+            $em->flush();
         }
 
         return $this->render('front/book/book.html.twig', [

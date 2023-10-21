@@ -37,7 +37,7 @@ em{
 p, strong, 
 label, span, div, 
 td, 
-a, button, 
+a, button, i,
 .form-control, .btn {
     font-size: 1.4rem;
 }
@@ -160,7 +160,7 @@ section[id$="-form"] div:has(form):not(.top-actions) {
     margin-top: 20px;
 }
 
-section[id$="-form"] button[type="submit"] {
+form button[type="submit"] {
     width: 50%;
 }
 
@@ -168,7 +168,7 @@ section[id$="-form"] button[type="submit"] {
     width: 100%!important;
 }
 
-section[id$="-form"] .form-group{
+section[id$="-form"] .form-group, #add-comment .form-group{
     margin: 15px 0;
 }
 
@@ -249,11 +249,73 @@ select[id*="publicationDate_year"] {
     justify-content: center;
 }
 
+#star-rating i, .nav-link {
+    cursor: pointer;
+}
+
+#comments .card {
+    margin-bottom: 20px;
+}
+
+#comments .card-header {
+    display: flex;
+    align-items: center;
+}
+
+#comments .card-header h3 {
+    margin: 0;
+}
+
+#comments .card-header * {
+    margin-right: 15px!important;
+}
+
+span.card-title {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+span.card-rating {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    background-color: #3b3b3b;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+span.card-rating * {
+    font-size: 1.4rem;
+}
+
+p.card-comments {
+    color: #838383;
+    font-style: italic;
+}
+
 @media (min-width: 1200px){
     #books div[class*="col-"], 
     #author-books div[class*="col-"],
     #author-associated div[class*="col-"] {
         margin-right: 20px;
+    }
+
+    span.card-rating {
+        top: 1%;
+        right: 2%;
+    }
+
+    p.card-comments {
+        color: #838383;
+    }
+
+    #books .single-book .card-body.bottom, 
+    #author-books .single-book .card-body.bottom {
+        display: flex;
+        justify-content: space-between;
     }
 }
 @media (min-width: 992px){
@@ -284,6 +346,10 @@ select[id*="publicationDate_year"] {
     #books div[class^="col-"]:has(> img),
     #author-books div[class^="col-"]:has(> img) {
         margin: auto;
+    }
+    span.card-rating {
+        top: -10%;
+        right: -4%;
     }
 }
 

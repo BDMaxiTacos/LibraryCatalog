@@ -5,19 +5,50 @@
 {% endif %}
 
 {# vertical card #}
-<div class="card col-xl-3 d-none d-xl-flex">
+<div class="card col-xl-3 d-none d-xl-flex single-book">
+    {% if book.comments|length > 0 %}
+        <span class="card-rating">
+            {% set rating = 0 %}
+            {% for comment in book.comments %}
+                {% set rating = rating + comment.rating %}
+            {% endfor %}
+            {% set averageRating = rating / (book.comments|length) %}
+            <i class="bi bi-star-fill">
+                <em>
+                    {{ averageRating }}
+                </em>
+            </i>
+        </span>
+    {% endif %}
     <img src="{{ image }}" width="100%" class="card-img-top" alt="{{ book.title }}">
     <div class="card-body">
         <h5 class="card-title">{{ book.title }}</h5>
         <p class="card-text">{{ book.catchphrase }}</p>
     </div>
-    <div class="card-body">
+    <div class="card-body bottom">
         <a href="{{ path('books_one', { id: book.id}) }}" class="card-link">En savoir plus</a>
+        <p class="card-comments">
+            {{ book.comments|length }} commentaire{% if book.comments|length > 1 %}s{% endif %}
+        </p>
     </div>
 </div>
 
 {# horizontal card #}
-<div class="card col-5 d-flex d-xl-none">
+<div class="card col-5 d-flex d-xl-none single-book">
+    {% if book.comments|length > 0 %}
+        <span class="card-rating">
+            {% set rating = 0 %}
+            {% for comment in book.comments %}
+                {% set rating = rating + comment.rating %}
+            {% endfor %}
+            {% set averageRating = rating / (book.comments|length) %}
+            <i class="bi bi-star-fill">
+                <em>
+                    {{ averageRating }}
+                </em>
+            </i>
+        </span>
+    {% endif %}
     <div class="row g-0">
         <div class="col-md-4">
             <img src="{{ image }}" width="100%" class="img-fluid rounded-start" alt="{{ book.title }}">
@@ -27,7 +58,10 @@
                 <h5 class="card-title">{{ book.title }}</h5>
                 <p class="card-text">{{ book.catchphrase }}</p>
             </div>
-            <div class="card-body">
+            <div class="card-body bottom">
+                <p class="card-comments">
+                    {{ book.comments|length }} commentaire{% if book.comments|length > 1 %}s{% endif %}
+                </p>
                 <a href="{{ path('books_one', { id: book.id}) }}" class="card-link">En savoir plus</a>
             </div>
         </div>
