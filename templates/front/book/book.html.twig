@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Détails livre {{ book.title }}{% endblock %}
+
 {% if book.imageUrl|length > 0 %}
     {% set image = book.imageUrl %}
 {% else %}
