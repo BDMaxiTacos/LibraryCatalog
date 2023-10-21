@@ -6,53 +6,52 @@
     </section>
 
     <section id="books" class="container pad-v">
-        <div class="d-none d-xl-block">
+        <div>
             <div class="row">
                 {% for book in books %}
-                    <div class="card col-xl-3">
-                        <img src="{{ book.imageUrl }}" class="card-img-top" alt="{{ book.title }}">
+                    {% if book.imageUrl|length > 0 %}
+                        {% set image = book.imageUrl %}
+                    {% else %}
+                        {% set image = asset('/assets/img/image_placeholder.webp') %}
+                    {% endif %}
+
+                    {# vertical card #}
+                    <div class="card col-xl-3 d-none d-xl-flex">
+                        <img src="{{ image }}" width="100%" class="card-img-top" alt="{{ book.title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ book.title }}</h5>
                             <p class="card-text">{{ book.catchphrase }}</p>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="card-link">En savoir plus</a>
+                            <a href="{{ path('books_one', { id: book.id}) }}" class="card-link">En savoir plus</a>
+                        </div>
+                    </div>
+
+                    {# horizontal card #}
+                    <div class="card col-5 d-flex d-xl-none">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ image }}" width="100%" class="img-fluid rounded-start" alt="{{ book.title }}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ book.title }}</h5>
+                                    <p class="card-text">{{ book.catchphrase }}</p>
+                                </div>
+                                <div class="card-body">
+                                    <a href="{{ path('books_one', { id: book.id}) }}" class="card-link">En savoir plus</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
                 
                 {% if books|length % 3 == 1 %}
-                    <div class="col-xl-3"></div>
+                    <div class="col-xl-3 d-none d-xl-flex"></div>
                 {% endif %}
-
-                {% if books|length < 1 %}
-                    <p class="col-xl-3">Aucun livre trouvé</p>
-                {% endif %}
-            </div>
-        </div>
-        <div class="d-block d-xl-none">
-            <div class="row">
-                {% for book in books %}
-                    <div class="card col-5">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="" class="img-fluid rounded-start" alt="{{ book.title }}">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="card-title">{{ book.title }}</h5>
-                              <p class="card-text">{{ book.catchphrase }}</p>
-                            </div>
-                            <div class="card-body">
-                                <a href="#" class="card-link">En savoir plus</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                {% endfor %}
 
                 {% if books|length % 2 == 1 %}
-                    <div class="col-5"></div>
+                    <div class="col-5 d-flex d-xl-none"></div>
                 {% endif %}
 
                 {% if books|length < 1 %}
@@ -60,6 +59,5 @@
                 {% endif %}
             </div>
         </div>
-        
     </section>
 {% endblock %}

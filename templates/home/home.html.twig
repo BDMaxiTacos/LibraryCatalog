@@ -38,8 +38,15 @@
         <h2>Derniers ajouts</h2>
         <div class="row">
             {% for book in books %}
-                <div class="card col-xl-3">
-                    <img src="" class="card-img-top" alt="{{ book.title }}">
+                {% if book.imageUrl|length > 0 %}
+                    {% set image = book.imageUrl %}
+                {% else %}
+                    {% set image = asset('/assets/img/image_placeholder.webp') %}
+                {% endif %}
+
+                {# vertical card #}
+                <div class="card col-md-3">
+                    <img src="{{ image }}" width="100%" class="card-img-top" alt="{{ book.title }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ book.title }}</h5>
                         <p class="card-text">{{ book.catchphrase }}</p>
