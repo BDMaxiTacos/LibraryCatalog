@@ -104,7 +104,7 @@ class AppFixtures extends Fixture
             $book = new Book();
 
             $book->setTitle($faker->words(4, true));
-            $book->setPublicationDate(new DateTime(`-$i weeks`));
+            $book->setPublicationDate(new DateTime());
 
             $randAuths = $faker->numberBetween(1,2);
             for($j = 0; $j < $randAuths; $j++){

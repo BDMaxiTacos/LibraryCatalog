@@ -7,6 +7,28 @@
         <h1 class="page-title">Liste des livres</h1>
     </section>
 
+    <section id="search-books-form" class="pad-v df-center">
+        {{ form_start(form, { attr: { class: 'row' } }) }}
+            <div class="form-group col-12 col-xl-6">
+                {{ form_label(form.title, 'Titre', { attr: { 'class': 'form-label' } }) }}
+                {{ form_widget(form.title, { attr: { 'class': 'form-control' } }) }}
+            </div>
+            <div class="form-group col-12 col-xl-6">
+                {{ form_label(form.publicationDate, 'Date de publication', { attr: { 'class': 'form-label' } }) }}
+                {{ form_widget(form.publicationDate, { attr: { 'class': 'form-control' } }) }}
+            </div>
+            <div class="form-group col-12 col-xl-6">
+                {{ form_label(form.category, 'Catégorie', { attr: { 'class': 'form-label' } }) }}
+                {{ form_widget(form.category, { attr: { 'class': 'select2-multiple form-control' } }) }}
+            </div>
+            <div class="form-group col-12 col-xl-6">
+                {{ form_label(form.authors, 'Auteurs', { attr: { 'class': 'form-label' } }) }}
+                {{ form_widget(form.authors, { attr: { 'class': 'select2-multiple form-control' } }) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Valider</button>
+        {{ form_end(form) }}
+    </section>
+
     <section id="books" class="container pad-v">
         <div>
             <div class="row">

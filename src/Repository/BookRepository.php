@@ -29,6 +29,28 @@ class BookRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    public function searchBy(array $options){
+        $qb = $this->createQueryBuilder('b');
+
+        foreach ($options as $key => $value) {
+            
+            switch($value['type']){
+                case '==':
+                    $qb = $qb->andWhere("b.".$key." = ".$value['value']);
+                    break;
+                case 'like':
+                    $qb = $qb->andWhere("b.".$key." LIKE '%" . $value['value'] . "%'");
+                    break;
+                case 'date':
+                    $qb = $qb->andWhere("b.".$key." < '". $value['value']->format('Y-m-d H:i:s')."'");
+                    break;
+            }
+        }
+        // dd($qb->getQuery()->getSQL());
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Book[] Returns an array of Book objects
 //     */

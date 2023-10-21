@@ -105,8 +105,6 @@ class AdminController extends AbstractController
             if($form->isSubmitted() && $form->isValid()){
                 $book = $form->getData();
 
-                $book->setPublicationDate(new \DateTime());
-
                 $imageFile = $form->get('image')->getData();
 
                 if ($imageFile) {

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nous contacte{% endblock %}
+{% block title %}Nous contacter{% endblock %}
 
 {% block body %}
     <section id="contact-form" class="container pad-v">
@@ -31,7 +31,7 @@
                     {{ form_widget(form.message, { attr: { 'class': 'form-control' } }) }}
                 </div>
                 {{ form_row(form._token) }}
-                <button type="submit" class="btn btn-primary">Se connecter</button>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
         </div>
     </section>

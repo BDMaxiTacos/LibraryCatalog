@@ -19,13 +19,17 @@
         </div>
         <div>
             {{ form_start(form, { attr: { class: 'row entity-form' } }) }}
-                <div class="form-group col-12 col-xl-6">
+                <div class="form-group col-12">
                     {{ form_label(form.title, 'Titre', { attr: { 'class': 'form-label' } }) }}
                     {{ form_widget(form.title, { attr: { 'class': 'form-control' } }) }}
                 </div>
                 <div class="form-group col-12 col-xl-6">
                     {{ form_label(form.image, 'Image', { attr: { 'class': 'form-label' } }) }}
                     {{ form_widget(form.image, { attr: { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group col-12 col-xl-6">
+                    {{ form_label(form.publicationDate, 'Date de publication', { attr: { 'class': 'form-label' } }) }}
+                    {{ form_widget(form.publicationDate, { attr: { 'class': 'form-control' } }) }}
                 </div>
                 <div class="form-group col-12">
                     {{ form_label(form.catchphrase, 'Phrase d\'accroche', { attr: { 'class': 'form-label' } }) }}
