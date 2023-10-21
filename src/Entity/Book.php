@@ -38,7 +38,7 @@ class Book
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image_url = null;
 
-    #[ORM\OneToMany(mappedBy: 'book', targetEntity: Comments::class)]
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: Comment::class)]
     private Collection $comments;
 
     public function __construct()
@@ -152,14 +152,14 @@ class Book
     }
 
     /**
-     * @return Collection<int, Comments>
+     * @return Collection<int, Comment>
      */
     public function getComments(): Collection
     {
         return $this->comments;
     }
 
-    public function addComment(Comments $comment): static
+    public function addComment(Comment $comment): static
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
@@ -169,7 +169,7 @@ class Book
         return $this;
     }
 
-    public function removeComment(Comments $comment): static
+    public function removeComment(Comment $comment): static
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)

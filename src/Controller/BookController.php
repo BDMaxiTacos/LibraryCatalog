@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Repository\BookRepository;
 use App\Form\SearchBookType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,11 +75,24 @@ class BookController extends AbstractController
 
     #[Route('/books/{id}', name: 'books_one')]
     public function one(
-        Book $book
+        Book $book,
+        Request $request
     ): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $formData = $form->getData();
+
+            // dd($formData);
+
+        }
+
         return $this->render('front/book/book.html.twig', [
-            'book' => $book
+            'book' => $book,
+            'form' => $form
         ]);
     }
 }
