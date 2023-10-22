@@ -87,7 +87,13 @@ function setRating(e, stars){
             star.classList.remove('locked');
         }
     });
-    document.getElementById('comment_rating').value = e.target.dataset.value;
+
+    let setVal = e.target.dataset.value;
+    if(setVal > 5){
+        setVal = 5;
+    }
+
+    document.getElementById('comment_rating').value = setVal;
 }
 
 function setFill(e, stars){

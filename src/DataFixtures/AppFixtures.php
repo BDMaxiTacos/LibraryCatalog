@@ -8,6 +8,8 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Category;
+use App\Entity\Comment;
+use App\Entity\Loan;
 use App\Entity\User;
 use DateTime;
 use Faker;
@@ -28,42 +30,10 @@ class AppFixtures extends Fixture
         
         $categories = $this->loadCategories($faker, $manager);
         $authors = $this->loadAuthors($faker, $manager);
-        $categories = $this->loadBooks($faker, $manager, $categories, $authors);
-
-        //librarian
-        $user = new User();
-
-        $user->setUsername('admin');
-
-        $password = 'admin';
-        $password = $this->hasher->hashPassword(
-            $user,
-            $password
-        );
-
-        $user->setPassword($password);
-
-        $roles = $user->getRoles();
-        array_push($roles, "ROLE_LIBRARIAN");
-
-        $user->setRoles($roles);
-
-        $manager->persist($user);
-
-        //visitor
-        $user = new User();
-
-        $user->setUsername('user');
-
-        $password = 'user';
-        $password = $this->hasher->hashPassword(
-            $user,
-            $password
-        );
-
-        $user->setPassword($password);
-
-        $manager->persist($user);
+        $books = $this->loadBooks($faker, $manager, $categories, $authors);
+        $users = $this->loadUsers($manager);
+        $comments = $this->loadComments($faker, $manager, $books, $users);
+        $loans = $this->loadLoans($faker, $manager, $books, $users);
 
         $manager->flush();
     }
@@ -124,4 +94,96 @@ class AppFixtures extends Fixture
 
         return $books;
     }
+
+    private function loadUsers($manager){
+        $users = array();
+
+        //librarian
+        $user = new User();
+
+        $user->setUsername('admin');
+
+        $password = 'admin';
+        $password = $this->hasher->hashPassword(
+            $user,
+            $password
+        );
+
+        $user->setPassword($password);
+
+        $roles = $user->getRoles();
+        array_push($roles, "ROLE_LIBRARIAN");
+
+        $user->setRoles($roles);
+
+        $users[] = $user;
+        $manager->persist($user);
+        
+        //visitor
+        $user = new User();
+        
+        $user->setUsername('user');
+        
+        $password = 'user';
+        $password = $this->hasher->hashPassword(
+            $user,
+            $password
+        );
+        
+        $user->setPassword($password);
+        
+        $users[] = $user;
+        $manager->persist($user);
+        
+        return $users;
+    }
+
+    private function loadComments($faker, $manager, $books, $users){
+        $comments = array();
+        for($i = 0; $i < 30; $i++){
+            $comment = new Comment();
+
+            $comment->setPublicationDate($faker->dateTime());
+
+            $comment->setRating($faker->numberBetween(1, 5));
+            $comment->setComment($faker->realText(250, 1));
+
+            $rand = $faker->numberBetween(0, count($books)-1);
+            $comment->setBook($books[$rand]);
+
+            $rand = $faker->numberBetween(0, count($users)-1);
+            $comment->setUser($users[$rand]);
+
+            $comments[] = $comment;
+            $manager->persist($comment);
+        }
+
+        return $comments;
+    }
+
+    private function loadLoans($faker, $manager, $books, $users){
+        $loans = array();
+        for($i = 0; $i < 4; $i++){
+            $loan = new Loan();
+
+            $loan->setLoanDate($faker->dateTimeBetween('-1 week'));
+            $loan->setLimitDate($faker->dateTimeBetween(new DateTime(), '+2 weeks'));
+
+            $loan->setStatus($faker->numberBetween(0, 2));
+
+            $rand = $faker->numberBetween(0, count($books)-1);
+            $loan->setBook($books[$rand]);
+            array_splice($books, $rand, 1);
+
+            $rand = $faker->numberBetween(0, count($users)-1);
+            $loan->setUser($users[$rand]);
+
+            $loans[] = $loan;
+            $manager->persist($loan);
+        }
+
+        return $loans;
+    }
+
+
 }

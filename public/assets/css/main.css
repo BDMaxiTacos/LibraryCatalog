@@ -310,15 +310,10 @@ span.card-title {
 }
 
 span.card-rating {
-    position: absolute;
-    height: 35px;
-    width: 35px;
-    background-color: #3b3b3b;
-    color: white;
     border-radius: 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
 }
 
 span.card-rating * {
@@ -328,6 +323,14 @@ span.card-rating * {
 p.card-comments {
     color: #838383;
     font-style: italic;
+}
+
+#books .single-book .card-body.bottom, 
+#author-books .single-book .card-body.bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
 }
 
 @media (min-width: 1200px){
@@ -345,15 +348,8 @@ p.card-comments {
     p.card-comments {
         color: #838383;
     }
-
-    #books .single-book .card-body.bottom, 
-    #author-books .single-book .card-body.bottom {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-        align-items: center;
-    }
 }
+
 @media (min-width: 992px){
     nav .navbar-collapse {
         flex-grow: unset;
@@ -383,9 +379,14 @@ p.card-comments {
     #author-books div[class^="col-"]:has(> img) {
         margin: auto;
     }
+
     span.card-rating {
         top: -10%;
         right: -4%;
+    }
+
+    .card {
+        justify-content: center;
     }
 }
 
