@@ -72,6 +72,16 @@ php bin/console doctrine:database:create
     mysql -u <user> -p <dbname> < dumpsql22-10-2023.sql
     ```
 
+### Mailer
+
+- Remplir les champs commençant avec "MAIL_":
+```
+MAIL_HOST=""
+MAIL_PORT=
+MAIL_FROM=""
+MAIL_TO=""
+```
+
 ### (Local)
 
 ```

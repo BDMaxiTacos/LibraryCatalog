@@ -53,8 +53,8 @@ class HomeController extends AbstractController
             $mail->Password   = '';
             $mail->Port       = $this->getParameter('mail_port');
 
-            $mail->setFrom($this->getParameter('mail_from'), 'Mailer');
-            $mail->addAddress($this->getParameter('mail_email'), 'Joe User');
+            $mail->setFrom($this->getParameter('mail_from'), 'No Reply');
+            $mail->addAddress($this->getParameter('mail_to'), 'Library Contact');
 
             $email = $this->render('emails/contact.html.twig',[
                 'form' => $formData,
