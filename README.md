@@ -1,5 +1,7 @@
 # Présentation
 
+Cette installation a été effectuée sur une machine Ubuntu (Linux) en local
+
 ## Paramètres du projet
 
 - Symfony 6.3.5
@@ -8,22 +10,39 @@
 
 ## Installation
 
-- Cloner le projet
+- Cloner le projet (être dans un dossier vide)
  ```
- git clone https://github.com/BDMaxiTacos/LibraryCatalog.git
+ git clone https://github.com/BDMaxiTacos/LibraryCatalog.git ./
  ```
+
+- Copier le .env.bak en .env et en .env.local
+ ```
+ cp .env.bak .env
+ cp .env.bak .env.local
+ ```
+
 ### (Local)
+
+- Modifier le fichier .env.local:
+```
+nano .env.local
+```
+
+- Mettre la variable "APP_ENV" en "dev":
+```
+APP_ENV=dev
+```
+
+- Remplir les champs "user" et "pass" de la variable "DATABASE_URL" et décommentez la ligne:
+```
+DATABASE_URL="mysql://<user>:<pass>@127.0.0.1:3306/library?serverVersion=8.0.32&charset=utf8mb4"
+```
 
 - Installer les dépendences
  ```
  composer install
  ```
-### (Serveur)
 
-- Installer les dépendences
- ```
- composer install --no-dev --optimize-autoloader
- ```
 ### Base de données
 
 - Créer la base de données
@@ -31,7 +50,7 @@
 php bin/console doctrine:database:create
 ```
 
-- 3 façons de faire la base de données
+- 2 façons de faire la base de données
 
     - Avec les migrations :
         ```
@@ -42,15 +61,17 @@ php bin/console doctrine:database:create
         php bin/console doctrine:schema:update --force
         ```
 
-    Pour les migrations et le schema update, il faut lancer les fixtures :
+- Ensuite vous pouvez :
+    - Soit lancer les fixtures (pas d'images mises sur les livres) :
     ```
     php bin/console doctrine:fixtures:load
     ```
+    
+    - Soit importer le fichier .sql du projet (images mises sur les livres) :
+    ```
+    mysql -u <user> -p <dbname> < dumpsql22-10-2023.sql
+    ```
 
-    - Avec le fichier .sql du projet :
-    ```
-    mysqldump -u <user> -p <dbname> < dumpsql22-10-2023.sql
-    ```
 ### (Local)
 
 ```
