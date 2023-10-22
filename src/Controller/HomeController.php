@@ -4,12 +4,11 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use App\Repository\BookRepository;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -28,8 +27,7 @@ class HomeController extends AbstractController
 
     #[Route('/contact', name: 'contact')]
     public function contact(
-        Request $request,
-        MailerInterface $mailer
+        Request $request
     ): Response
     {
         $form = $this->createForm(ContactType::class);
@@ -37,8 +35,6 @@ class HomeController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $formData = $form->getData();
-
-            // dd($formData);
 
             $user = $this->getUser();
 
@@ -48,24 +44,34 @@ class HomeController extends AbstractController
                 $username = $user->getUserIdentifier();
             }
 
-            $email = (new TemplatedEmail())
-                        ->from('no-reply@library.fr')
-                        ->to(new Address('test@mailhog.local'))
-                        ->subject('Formulaire de contact')
-                        ->htmlTemplate('emails/contact.html.twig')
-                        ->context([
-                            'form' => $formData,
-                            'date' => new \DateTime(),
-                            'username' => $username
-                        ])
-            ;
+            $mail = new PHPMailer(true);
 
-            if(!$mailer->send($email)){
-                $this->addFlash('error', 'Votre message n\'a pas pu être envoyé');
-            }else{
+            $mail->isSMTP();
+            $mail->Host       = $this->getParameter('mail_host');
+            $mail->SMTPAuth   = true;
+            $mail->Username   = '';
+            $mail->Password   = '';
+            $mail->Port       = $this->getParameter('mail_port');
+
+            $mail->setFrom($this->getParameter('mail_from'), 'Mailer');
+            $mail->addAddress($this->getParameter('mail_email'), 'Joe User');
+
+            $email = $this->render('emails/contact.html.twig',[
+                'form' => $formData,
+                'date' => new \DateTime(),
+                'username' => $username
+            ])->getContent();
+
+            $mail->isHTML(true);
+            $mail->Subject = "Formulaire de contact";
+            $mail->Body    = $email;
+
+            try {
+                $mail->send();
                 $this->addFlash('success', 'Votre message a bien été envoyé');
+            }catch(Exception $e){
+                $this->addFlash('error', 'Votre message n\'a pas pu être envoyé');
             }
-            
             return $this->redirectToRoute('home');
         }
         
