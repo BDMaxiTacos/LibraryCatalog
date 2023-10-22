@@ -8,6 +8,10 @@ parameters:
     public_directory: '%kernel.project_dir%/public'
     db_images_directory: '/assets/img/'
     db_books_directory: '/assets/img/books/'
+    mail_host: '%env(MAIL_HOST)%'
+    mail_port: '%env(MAIL_PORT)%'
+    mail_from: '%env(MAIL_FROM)%'
+    mail_to: '%env(MAIL_TO)%'
     
 services:
     # default configuration for services in *this* file
