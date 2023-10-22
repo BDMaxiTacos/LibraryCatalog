@@ -30,26 +30,24 @@
     </section>
 
     <section id="books" class="container pad-v">
-        <div>
-            <div class="row">
-                {% for book in books %}
-                    {% include 'includes/singlebook.html.twig' with {book: book} %}
+        <div class="row">
+            {% for book in books %}
+                {% include 'includes/singlebook.html.twig' with {book: book} %}
+            {% endfor %}
+            
+            {% if books|length % 3 >= 1 %}
+                {% for i in 0..(books|length % 3) %}
+                    <div class="col-xl-3 d-none d-xl-flex"></div>
                 {% endfor %}
-                
-                {% if books|length % 3 >= 1 %}
-                    {% for i in 0..(books|length % 3) %}
-                        <div class="col-xl-3 d-none d-xl-flex"></div>
-                    {% endfor %}
-                {% endif %}
+            {% endif %}
 
-                {% if books|length % 2 == 1 %}
-                    <div class="col-5 d-flex d-xl-none"></div>
-                {% endif %}
+            {% if books|length % 2 == 1 %}
+                <div class="col-5 d-flex d-xl-none"></div>
+            {% endif %}
 
-                {% if books|length < 1 %}
-                    <p class="col-xl-3">Aucun livre trouvé</p>
-                {% endif %}
-            </div>
+            {% if books|length < 1 %}
+                <p class="col-xl-3">Aucun livre trouvé</p>
+            {% endif %}
         </div>
     </section>
 {% endblock %}

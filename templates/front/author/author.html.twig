@@ -36,11 +36,14 @@
                 {% set authors = authors + 1 %}
             {% endfor %}
 
-            {% set toDisplay = 3 - authors|length % 3 %}
-            {% if toDisplay >= 1 %}
-                {% for i in 1..toDisplay %}
+            {% if authors|length % 3 >= 1 %}
+                {% for i in 0..(authors|length % 3) %}
                     <div class="col-xl-3 d-none d-xl-flex"></div>
                 {% endfor %}
+            {% endif %}
+
+            {% if authors|length % 2 == 1 %}
+                <div class="col-5 d-flex d-xl-none"></div>
             {% endif %}
 
             {% if authors < 1 %}

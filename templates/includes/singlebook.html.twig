@@ -6,6 +6,15 @@
 
 {# vertical card #}
 <div class="card col-xl-3 d-none d-xl-flex single-book">
+    {% if isAvailable[book.id] %}
+        <span class="badge text-bg-success">
+            Disponible
+        </span>
+    {% else %}
+        <span class="badge text-bg-danger">
+            Non Disponible
+        </span>
+    {% endif %}
     <img src="{{ image }}" width="100%" class="card-img-top" alt="{{ book.title }}">
     <div class="card-body">
         <h5 class="card-title">{{ book.title }}</h5>
@@ -36,6 +45,15 @@
 {# horizontal card #}
 <div class="card col-5 d-flex d-xl-none single-book">
     <div class="row g-0">
+        {% if isAvailable[book.id] %}
+            <span class="badge text-bg-success">
+                Disponible
+            </span>
+        {% else %}
+            <span class="badge text-bg-danger">
+                Non Disponible
+            </span>
+        {% endif %}
         <div class="col-md-4">
             <img src="{{ image }}" width="100%" class="img-fluid rounded-start" alt="{{ book.title }}">
         </div>

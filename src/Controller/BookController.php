@@ -68,10 +68,16 @@ class BookController extends AbstractController
                 $books = $displayedBooks;
             }
         }
+
+        $booksAvailability = array();
+        foreach($books as $book){
+            $booksAvailability[$book->getId()] = !$book->hasCurrentloan(); 
+        }
         
         return $this->render('front/book/books.html.twig', [
             'books' => $books,
-            'form' => $form
+            'form' => $form,
+            'isAvailable' => $booksAvailability
         ]);
     }
 

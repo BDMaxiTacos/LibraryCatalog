@@ -41,10 +41,16 @@ class AuthorController extends AbstractController
             }
         }
 
+        $booksAvailability = array();
+        foreach($author->getBooks()->getValues() as $book){
+            $booksAvailability[$book->getId()] = !$book->hasCurrentloan(); 
+        }
+
         return $this->render('front/author/author.html.twig', [
             'author' => $author,
             'associatedAuthor' => $associatedAuthors,
-            'associatedCategories' => $associatedCategories
+            'associatedCategories' => $associatedCategories,
+            'isAvailable' => $booksAvailability
         ]);
     }
 }

@@ -64,13 +64,11 @@ class AdminAuthorController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $author = $form->getData();
-
-            $author->setPublicationDate(new \DateTime());
             
             $em->persist($author);
             $em->flush();
 
-            $this->addFlash('success', 'L\auteur a bien été ajouté');
+            $this->addFlash('success', 'L\'auteur a bien été ajouté');
             return $this->redirectToRoute('admin_authors');
         }
         

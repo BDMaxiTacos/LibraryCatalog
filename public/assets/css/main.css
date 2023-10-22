@@ -103,6 +103,7 @@ footer section {
 }
 
 #books div[class*="col-"],
+#authors div[class*="col-"],
 #author-books div[class*="col-"],
 #author-associated div[class*="col-"] {
     margin-bottom: 20px;
@@ -333,9 +334,17 @@ p.card-comments {
     align-items: center;
 }
 
+.card.single-book .badge {
+    position: absolute;
+    top: 1%;
+    left: 3%;
+    width: fit-content;
+}
+
 @media (min-width: 1200px){
     #books div[class*="col-"], 
     #author-books div[class*="col-"],
+    #authors div[class*="col-"],
     #author-associated div[class*="col-"] {
         margin-right: 20px;
     }
@@ -374,6 +383,10 @@ p.card-comments {
 }
 
 @media (max-width: 1199px) {
+
+    #book-details div[class^="col-"]:has(> img) img {
+        margin-bottom: 20px;
+    }
 
     #books div[class^="col-"]:has(> img),
     #author-books div[class^="col-"]:has(> img) {

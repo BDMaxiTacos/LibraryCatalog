@@ -41,6 +41,7 @@
                     </span>
                 {% endif %}
                 <div class="associated-authors">
+                    Auteurs :
                     {% for author in book.authors %}
                         <a href="{{ path('authors_one', { id: author.id }) }}">{{ author.name }} {{ author.firstname }}</a>
                         {% if author != book.authors|last %}
