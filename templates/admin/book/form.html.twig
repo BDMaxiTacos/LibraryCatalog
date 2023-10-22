@@ -24,7 +24,12 @@
                     {{ form_widget(form.title, { attr: { 'class': 'form-control' } }) }}
                 </div>
                 <div class="form-group col-12 col-xl-6">
-                    {{ form_label(form.image, 'Image', { attr: { 'class': 'form-label' } }) }}
+                    <div class="d-flex">
+                        {{ form_label(form.image, 'Image', { attr: { 'class': 'form-label' } }) }}
+                        {% if 'book_edit' in app.request.get('_route') and book.imageUrl|length > 0 %}
+                            <a class="current-image" target="_blank" href="{{ asset(book.imageUrl) }}">Image actuelle</a>
+                        {% endif %}
+                    </div>
                     {{ form_widget(form.image, { attr: { 'class': 'form-control' } }) }}
                 </div>
                 <div class="form-group col-12 col-xl-6">

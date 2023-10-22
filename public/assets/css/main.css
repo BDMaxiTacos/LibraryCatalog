@@ -341,6 +341,12 @@ p.card-comments {
     width: fit-content;
 }
 
+.entity-form .current-image {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
 @media (min-width: 1200px){
     #books div[class*="col-"], 
     #author-books div[class*="col-"],
