@@ -15,6 +15,15 @@
                 <img src="{{ image }}" width="100%" alt="{{ book.title }}">
             </div>
             <div class="col-xl-6">
+                {% if isAvailable %}
+                    <span class="badge text-bg-success">
+                        Disponible
+                    </span>
+                {% else %}
+                    <span class="badge text-bg-danger">
+                        Non Disponible
+                    </span>
+                {% endif %}
                 <h1 class="page-title">{{ book.title }}</h1>
                 <p>{{ book.catchphrase }}</p>
                 {% if book.comments|length > 0 %}

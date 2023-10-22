@@ -93,15 +93,14 @@ class BookController extends AbstractController
             $comment->setBook($book);
             $comment->setPublicationDate(new DateTime());
 
-            // dd($comment);
-
             $em->persist($comment);
             $em->flush();
         }
 
         return $this->render('front/book/book.html.twig', [
             'book' => $book,
-            'form' => $form
+            'form' => $form,
+            'isAvailable' => !$book->hasCurrentLoan()
         ]);
     }
 }

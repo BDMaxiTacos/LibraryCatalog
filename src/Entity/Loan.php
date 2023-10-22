@@ -31,6 +31,12 @@ class Loan
     #[ORM\Column]
     private ?int $status = null;
 
+    const STATUS = array(
+        array('word' => "Rendu", "class" => "text-bg-success"),
+        array('word' => "En cours", "class" => "text-bg-secondary"),
+        array('word' => "Retard", "class" => "text-bg-danger")
+    );
+
     public function getId(): ?int
     {
         return $this->id;

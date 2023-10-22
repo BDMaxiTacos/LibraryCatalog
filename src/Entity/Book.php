@@ -214,4 +214,15 @@ class Book
 
         return $this;
     }
+
+    public function hasCurrentLoan(){
+        $hasLoan = false;
+        if(count($this->loans->getValues()) > 0){
+            $lastLoan = $this->loans->last();
+            $hasLoan = $lastLoan->getStatus() == 1 || $lastLoan->getStatus() == 2;
+        }
+        
+
+        return $hasLoan;
+    }
 }

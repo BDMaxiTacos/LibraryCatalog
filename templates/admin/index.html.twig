@@ -6,33 +6,27 @@
     <section id="admin-actions" class="container pad-v">
         <div class="row">
             <h1>Bonjour {{ user.username }},</h1>
-            <div class="col-xl-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Gérer les auteurs</h5>
-                        <p class="card-text">Gestion des auteurs (éditer, supprimer, ajouter)</p>
-                        <a href="{{ path('admin_authors') }}" class="card-link">Accéder</a>
-                    </div>
+            <div class="card col-xl-3">
+                <div class="card-body">
+                    <h5 class="card-title">Gérer les auteurs</h5>
+                    <p class="card-text">Gestion des auteurs (éditer, supprimer, ajouter)</p>
+                    <a href="{{ path('admin_authors') }}" class="card-link">Accéder</a>
                 </div>
             </div>
-            <div class="col-xl-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Gérer les livres</h5>
-                        <p class="card-text">Gestion des livres (éditer, supprimer, ajouter)</p>
-                        <a href="{{ path('admin_books') }}" class="card-link">Accéder</a>
-                    </div>
+            <div class="card col-xl-3">
+                <div class="card-body">
+                    <h5 class="card-title">Gérer les livres</h5>
+                    <p class="card-text">Gestion des livres (éditer, supprimer, ajouter)</p>
+                    <a href="{{ path('admin_books') }}" class="card-link">Accéder</a>
                 </div>
             </div>
-            {# <div class="col-xl-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Gérer les emprunts</h5>
-                        <p class="card-text">Gestion des emprunts (éditer, supprimer, ajouter)</p>
-                        <a href="{{ path('admin_loans') }}" class="card-link">Accéder</a> 
-                    </div>
+            <div class="card col-xl-3">
+                <div class="card-body">
+                    <h5 class="card-title">Gérer les emprunts</h5>
+                    <p class="card-text">Gestion des emprunts (éditer, retour, ajouter)</p>
+                    <a href="{{ path('admin_loans') }}" class="card-link">Accéder</a>
                 </div>
-            </div> #}
+            </div>
         </div>
     </section>
 {% endblock %}

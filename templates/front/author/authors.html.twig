@@ -11,11 +11,11 @@
         <div>
             <div class="row">
                 {% for author in authors %}
-                    <div class="card col-xl-3">
+                    <div class="card col-5 col-xl-3">
                         <div class="card-body">
                             <h5 class="card-title">{{ author.name }} {{ author.firstname }}</h5>
                             <p class="card-text">Nombre de livres: {{ author.books|length }}</p>
-                            <a href="{{ path('authors_one', { id: author.id }) }}" class="btn btn-primary">En savoir plus</a>
+                            <a href="{{ path('authors_one', { id: author.id }) }}" class="card-link">En savoir plus</a>
                         </div>
                     </div>
                 {% endfor %}

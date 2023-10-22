@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des emprunts{% endblock %}
+
+{% block body %}
+    <section id="admin-books" class="container pad-v">
+        <h1>Gestion des emprunts</h1>
+        <div class="top-actions">
+            <a type="button" href="{{ path('admin_home') }}" class="btn btn-secondary"><i class="bi bi-chevron-left"></i> Retour à l'accueil</a>
+            <a type="button" href="{{ path('admin_loan_add') }}" class="btn btn-secondary"><i class="bi bi-plus"></i> Ajouter</a>
+        </div>
+        <div class="row">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+            <table id="datatable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Livre</th>
+                        <th>Utilisateur</th>
+                        <th>Date d'emprunt</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loan in loans %}
+                    <tr>
+                        <td>{{ loan.book.title }}</td>
+                        <td>{{ loan.user.username }}</td>
+                        <td>{{ loan.loanDate|date('d-m-Y') }}</td>
+                        <td><span class="badge {{ status[loan.status]['class'] }}">{{ status[loan.status]['word'] }}</span></td>
+                        <td class="row">
+                            <a class="col-6" href="{{ path('admin_loan_edit', {id: loan.id}) }}">
+                                <button class="btn btn-secondary">
+                                    <i class="bi bi-pen"></i>
+                                </button>
+                            </a>
+                            <form class="col-6" method="POST" action="{{ path('admin_loan_return', {id: loan.id}) }}"
+                                    onsubmit="return confirm('Le livre a bien été rendu ?')">
+                                <input type="hidden" name="_method" value="POST">
+                                <input type="hidden" name="_token" value="{{ csrf_token('return' ~ loan.id) }}">
+                                <button class="btn btn-{% if loan.status < 2 %}primary{% else %}danger{% endif %}" 
+                                    {% if loan.status < 1 %}disabled{% endif %}
+                                >
+                                    <i class="bi bi-arrow-return-right"></i> Retour
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

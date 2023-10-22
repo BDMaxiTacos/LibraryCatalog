@@ -34,6 +34,10 @@ em{
     font-size: 0.75em;
 }
 
+p {
+    margin: 0;
+}
+
 p, strong, 
 label, span, div, 
 td, 
@@ -104,17 +108,33 @@ footer section {
     margin-bottom: 20px;
 }
 
-.card-body:has(.card-link) a{
-    transition: border-bottom 0.5s;
-    padding-bottom: 3px;
+.card-body:has(.card-link) a {
+    padding: 5px;
+    width: fit-content;
 }
 
-.card-body:has(.card-link) a:hover {
+.card-body:has(.card-link) a, form button.btn:not([class*="btn-danger"]){
+    transition: border-bottom 0.5s, background-color 0.5s, color 0.5s;
+    background-color: #505050;
+    color: white;
+    border: 1px solid #0000007c;
+}
+
+.card-body:has(.card-link) a:hover, form button.btn:not([class*="btn-danger"]):hover {
     border-bottom: 1px solid #0000007c;
+    background-color: unset;
+    color: #505050;
 }
 
 .row {
     justify-content: space-around;
+    align-items: stretch;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #banner {
@@ -234,7 +254,8 @@ div.top-actions {
     margin-top: 30px;
 }
 
-div[id*="publicationDate"] {
+div[id*="publicationDate"],
+div[id*="limitDate"] {
     padding: 0;
     min-height: 30px;
     display: flex;
@@ -242,12 +263,19 @@ div[id*="publicationDate"] {
 }
 
 select[id*="publicationDate_month"],
-select[id*="publicationDate_day"] {
+select[id*="publicationDate_day"],
+select[id*="limitDate_month"],
+select[id*="limitDate_day"] {
     width: 25%;
 }
 
+select[id*="limitDate_year"],
 select[id*="publicationDate_year"] {
     width: 40%;
+}
+
+.card-body.bottom * {
+    margin: 0;
 }
 
 .df-center {
@@ -322,6 +350,8 @@ p.card-comments {
     #author-books .single-book .card-body.bottom {
         display: flex;
         justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
     }
 }
 @media (min-width: 992px){

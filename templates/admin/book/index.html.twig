@@ -20,10 +20,11 @@
                     <p>{{ message }}</p>
                 </div>
             {% endfor %}
-            <table class="table table-striped">
+            <table id="datatable" class="table table-striped">
                 <thead>
                     <tr>
                         <th>Date de publication</th>
+                        <th>Disponibilité</th>
                         <th>Titre</th>
                         <th>Catégorie</th>
                         <th>Actions</th>
@@ -33,6 +34,7 @@
                     {% for book in books %}
                     <tr>
                         <td>{{ book.publicationDate|date("d-m-Y") }}</td>
+                        <td>{{ lastLoans[book.id] }}</td>
                         <td>{{ book.title }}</td>
                         <td>{{ book.category.name }}</td>
                         <td class="row">

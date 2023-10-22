@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <section id="loan-form" class="container pad-v">
+        <h1>{{ title }}</h1>
+        <div class="top-actions">
+            <a type="button" href="{{ path('admin_loans') }}" class="btn btn-secondary"><i class="bi bi-chevron-left"></i> Retour à la liste</a>
+        </div>
+        <div>
+            {{ form_start(form, { attr: { class: 'row entity-form' } }) }}
+                <div class="form-group col-12">
+                    {{ form_label(form.user, 'Utilisateur', { attr: { 'class': 'form-label' } }) }}
+                    {{ form_widget(form.user, { attr: { 'class': 'select2-multiple form-control' } }) }}
+                </div>
+                <div class="form-group col-12">
+                    {{ form_label(form.book, 'Livre', { attr: { 'class': 'form-label' } }) }}
+                    {{ form_widget(form.book, { attr: { 'class': 'select2-multiple form-control' } }) }}
+                </div>
+                <div class="form-group col-12">
+                    {{ form_label(form.limitDate, 'Date limite', { attr: { 'class': 'form-label' } }) }}
+                    {{ form_widget(form.limitDate, { attr: { 'class': 'form-control' } }) }}
+                </div>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}
