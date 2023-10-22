@@ -12,13 +12,13 @@
  ```
  git clone https://github.com/BDMaxiTacos/LibraryCatalog.git
  ```
-### Local
+### (Local)
 
 - Installer les dépendences
  ```
  composer install
  ```
-### Serveur
+### (Serveur)
 
 - Installer les dépendences
  ```
@@ -51,3 +51,12 @@ php bin/console doctrine:database:create
     ```
     mysqldump -u <user> -p <dbname> < dumpsql22-10-2023.sql
     ```
+### (Local)
+
+```
+symfony serve
+```
+ou
+```
+symfony server:start
+```
